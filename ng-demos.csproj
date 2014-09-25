@@ -108,6 +108,9 @@
     <Content Include="content\js\startup.js" />
     <Content Include="content\js\toastr.min.js" />
     <Content Include="ng-demo-01\index.html" />
+    <Content Include="ng-demo-02-final\index.html" />
+    <Content Include="ng-demo-02\index.html" />
+    <Content Include="ng-demo-03\index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
