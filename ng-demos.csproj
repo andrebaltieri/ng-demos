@@ -114,6 +114,7 @@
     <Content Include="ng-demo-03\index.html" />
     <Content Include="ng-demo-04-final\index.html" />
     <Content Include="ng-demo-04\index.html" />
+    <Content Include="ng-demo-05\index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

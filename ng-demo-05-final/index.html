@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <title>Directives</title>
+    <link href="../content/css/themes/bootstrap-superhero.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div ng-controller="MeuCtrl">
+        <div my-customer></div>
+        <hr />
+        <div class="row">
+            <div my-customer-badge class="col-md-4"></div>
+        </div>
+        <hr />
+        <div class="row">
+            <div my-customer-generic cliente="cliente2" class="col-md-4"></div>
+        </div>
+        <hr />
+        <div class="row">
+            <div ng-repeat="c in clientes" my-customer-generic cliente="c" class="col-md-3"></div>
+        </div>
+    </div>
+
+    <script src="../content/js/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+
+        app.controller('MeuCtrl', ['$scope', function ($scope) {
+            $scope.title = "Meu Controller";
+
+            $scope.cliente = {
+                nome: 'André',
+                sobrenome: 'Baltieri',
+                imagem: 'http://placehold.it/80x80',
+                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper sem vitae urna pellentesque, tempus eleifend erat vulputate. Fusce eu massa nec diam fermentum tincidunt. Cras consequat, orci et elementum tristique, elit est porttitor purus, ac fringilla dolor risus non metus. Morbi faucibus sodales felis, nec malesuada velit ultrices vel. Etiam ac neque non elit cursus lacinia non sit amet erat. Maecenas varius sem turpis, eu lacinia magna consectetur at. Integer non sodales ex.'
+            };
+
+            $scope.cliente2 = {
+                nome: 'Bruce',
+                sobrenome: 'Wayne',
+                imagem: 'http://placehold.it/80x80',
+                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper sem vitae urna pellentesque, tempus eleifend erat vulputate. Fusce eu massa nec diam fermentum tincidunt. Cras consequat, orci et elementum tristique, elit est porttitor purus, ac fringilla dolor risus non metus. Morbi faucibus sodales felis, nec malesuada velit ultrices vel. Etiam ac neque non elit cursus lacinia non sit amet erat. Maecenas varius sem turpis, eu lacinia magna consectetur at. Integer non sodales ex.'
+            };
+
+            $scope.clientes = [{
+                    nome: 'André',
+                    sobrenome: 'Baltieri',
+                    imagem: 'http://placehold.it/80x80',
+                    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper sem vitae urna pellentesque, tempus eleifend erat vulputate. Fusce eu massa nec diam fermentum tincidunt. Cras consequat, orci et elementum tristique, elit est porttitor purus, ac fringilla dolor risus non metus. Morbi faucibus sodales felis, nec malesuada velit ultrices vel. Etiam ac neque non elit cursus lacinia non sit amet erat. Maecenas varius sem turpis, eu lacinia magna consectetur at. Integer non sodales ex.'
+                }, {
+                    nome: 'Bruce',
+                    sobrenome: 'Wayne',
+                    imagem: 'http://placehold.it/80x80',
+                    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper sem vitae urna pellentesque, tempus eleifend erat vulputate. Fusce eu massa nec diam fermentum tincidunt. Cras consequat, orci et elementum tristique, elit est porttitor purus, ac fringilla dolor risus non metus. Morbi faucibus sodales felis, nec malesuada velit ultrices vel. Etiam ac neque non elit cursus lacinia non sit amet erat. Maecenas varius sem turpis, eu lacinia magna consectetur at. Integer non sodales ex.'
+                }];
+        }]);
+
+        app.directive('myCustomer', function () {
+            return {
+                template: 'Name: {{ cliente.nome }} Address: {{ cliente.sobrenome }}'
+            };
+        });
+
+        app.directive('myCustomerBadge', function () {
+            return {
+                templateUrl: 'my-customer-badge.html'
+            };
+        });
+
+        app.directive("myCustomerGeneric", function () {
+            return {
+                templateUrl: 'my-customer-badge.html',
+                scope: {
+                    cliente: '='
+                }
+            }
+        });
+    </script>
+</body>
+</html>
