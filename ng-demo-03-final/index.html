@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app>
+<head>
+    <title>TODO List</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../content/css/themes/bootstrap-paper.min.css" rel="stylesheet" />
+    <link href="../content/css/toastr.min.css" rel="stylesheet" />
+    <style>
+        .todo-true {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" ng-controller="MeuController">
+        <h1 class="text-center">{{ title }} - {{ remaining() }} restante(s)</h1>
+        <hr />
+        <div class="col-md-4">
+            <h3>Minhas Tarefas</h3>
+            <input type="text" class="form-control" placeholder="Filtrar" ng-model="search" />
+            <br />
+            <ul class="list-unstyled" ng-repeat="todo in todos | filter: search">
+                <li>
+                    <input type="hidden" value="{{ todo.id}}" />
+                    <input type="checkbox" ng-model="todo.done"> -
+                    <span class="todo-{{ todo.done }}">{{ todo.text }}</span>
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-default btn-sm" ng-click="editar(todo)"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" ng-click="excluir(todo)"><i class="fa fa-remove"></i></button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3>Gerenciar Tarefas</h3>
+            <input type="hidden" value="{{ todo.id}}" />
+            <input type="text" class="form-control" placeholder="Tarefa" ng-model="todo.text" />
+            <input type="checkbox" ng-model="todo.done" /> Tarefa Concluída
+            <hr />
+            <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="salvar(todo)">Salvar</button>
+            <button class="btn btn-primary" ng-show="todo.id != 0" ng-click="novo()">Novo</button>
+            <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="novo()">Cancelar</button>
+        </div>
+        <div class="col-md-4">
+            <h3>Ações</h3>
+            <p>Selecione o que deseja fazer:</p>
+            <button class="btn btn-info" ng-click="salvarDisco()">Persistir em Disco</button>
+            <button class="btn btn-success" ng-click="lerDisco()">Ler do Disco</button>
+        </div>
+    </div>
+
+    <script src="../content/js/jquery-2.1.1.min.js"></script>
+    <script src="../content/js/toastr.min.js"></script>
+    <script src="../content/js/angular.min.js"></script>
+    <script>
+        function MeuController($scope) {
+            $scope.title = "Minha Lista de Tarefas";
+
+            $scope.todo = {
+                id: 0,
+                text: '',
+                done: false
+            }
+
+            $scope.todos = [];
+
+            $scope.remaining = function () {
+                var count = 0;
+                angular.forEach($scope.todos, function (todo) {
+                    count += todo.done ? 0 : 1;
+                });
+                return count;
+            };
+
+            $scope.salvar = function (todo) {
+                if (todo.id == 0) {
+                    Salvar($scope.todo);
+                } else {
+                    Editar();
+                }
+                Novo();
+            }
+
+            $scope.novo = function () {
+                Novo();
+            }
+
+            $scope.editar = function (todo) {
+                $scope.todo = todo;
+            }
+
+            $scope.excluir = function (todo) {
+                var index = $scope.todos.indexOf(todo)
+                $scope.todos.splice(index, 1);
+            }
+
+            $scope.salvarDisco = function () {
+                localStorage.setItem("todos", JSON.stringify($scope.todos));
+                toastr.info('Informações salvas no disco com sucesso!', 'Tudo certo!');
+            }
+
+            $scope.lerDisco = function () {
+                $scope.todos = angular.fromJson(localStorage.getItem("todos"));
+                toastr.info('Informações carregadas com sucesso!', 'Tudo certo!');
+            }
+
+            function Salvar(item) {
+                item.id = $scope.todos.length + 1;
+                $scope.todos.push(item);
+            }
+
+            function Novo() {
+                $scope.todo = {
+                    id: 0,
+                    text: '',
+                    done: false
+                }
+            }
+
+            function Editar() {
+                alert('Editando');
+            }
+        }
+    </script>
+</body>
+</html>

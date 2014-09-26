@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <title>Módulos</title>
+</head>
+<body>
+    <div ng-controller="MeuCtrl">
+        <h1>{{ title }}</h1>
+    </div>
+    <script src="../content/js/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+
+        app.controller('MeuCtrl', ['$scope', function ($scope) {
+            $scope.title = "Meu Controller";
+        }]);
+    </script>
+</body>
+</html>
