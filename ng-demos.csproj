@@ -66,7 +66,13 @@
     <Content Include="content\js\angular-sanitize.min.js.map" />
     <Content Include="content\js\angular-touch.min.js.map" />
     <Content Include="content\js\angular.min.js.map" />
-    <Content Include="ng-demo-06\app\data\customers.json" />
+    <Content Include="ng-demo-06-final\404.html" />
+    <Content Include="ng-demo-06-final\app\app.js" />
+    <Content Include="ng-demo-06-final\app\areas\home\controllers\HomeCtrl.js" />
+    <Content Include="ng-demo-06-final\app\areas\home\vierws\index.html" />
+    <Content Include="ng-demo-06-final\app\repositories\CustomerRepository.js" />
+    <Content Include="ng-demo-06-final\index.html" />
+    <Content Include="ng-demo-06-final\app\data\customers.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -119,11 +125,8 @@
     <Content Include="ng-demo-05-final\my-customer-badge.html" />
     <Content Include="ng-demo-05\index.html" />
     <Content Include="ng-demo-06\404.html" />
-    <Content Include="ng-demo-06\app\app.js" />
-    <Content Include="ng-demo-06\app\areas\home\controllers\HomeCtrl.js" />
-    <Content Include="ng-demo-06\app\areas\home\vierws\index.html" />
-    <Content Include="ng-demo-06\app\repositories\CustomerRepository.js" />
     <Content Include="ng-demo-06\index.html" />
+    <Content Include="ng-demo-07\index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -131,7 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\img\" />
-    <Folder Include="ng-demo-06\app\directives\" />
+    <Folder Include="ng-demo-06-final\app\directives\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

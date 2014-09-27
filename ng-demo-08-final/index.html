@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <title>Autenticação</title>
+    <link href="../content/css/themes/bootstrap-superhero.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div ng-controller="MeuCtrl">
+        <h1 class="text-center">Autenticação</h1>
+        <div class="container text-center">
+            <button class="btn btn-info" ng-click="autenticar()">Autenticar</button>
+            <br /><br />
+            <p>
+                <span>{{ token }}</span>
+            </p>
+        </div>
+    </div>
+
+    <script src="../content/js/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+
+        app.controller('MeuCtrl', ['$scope', '$http', function ($scope, $http) {
+            $scope.title = "Meu Controller";
+            $scope.token = '';
+
+            $scope.autenticar = function () {
+                DoAuth();
+            }
+
+
+            var authurl = 'http://customer-service.azurewebsites.net/api/security/token';
+
+            function DoAuth() {
+                var data = "grant_type=password&username=andrebaltieri&password=andrebaltieri";
+
+                $http.post(authurl, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+                   .success(function (result) {
+                       console.log(result);
+                       $scope.token = result.access_token;
+                   });
+            }
+
+        }]);
+    </script>
+</body>
+</html>

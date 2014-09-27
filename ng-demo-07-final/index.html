@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <title>CRUD</title>
+    <link href="../content/css/themes/bootstrap-superhero.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div ng-controller="MeuCtrl">
+        <h1 class="text-center">CRUD</h1>
+        <div class="container text-center">
+            <button class="btn btn-info" ng-click="obter()">GET</button>
+            <button class="btn btn-info" ng-click="obterPorId()">GET(23)</button>
+            <button class="btn btn-info" ng-click="criar()">POST</button>
+            <button class="btn btn-info" ng-click="alterar()">PUT</button>
+            <button class="btn btn-info" ng-click="excluir()">DELETE</button>
+        </div>
+    </div>
+
+    <script src="../content/js/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+
+        app.controller('MeuCtrl', ['$scope', '$http', function ($scope, $http) {
+            $scope.title = "Meu Controller";
+
+            $scope.obter = function () {
+                Get();
+            }
+
+            $scope.obterPorId = function () {
+                GetById(23);
+            }
+
+            $scope.criar = function () {
+                var data = {                    
+                    id: 0,
+                    firstName: "André",
+                    lastName: "Baltieri",
+                    email: "andrebaltieri@hotmail.com"
+                };
+
+                Post(data);
+            }
+
+            $scope.alterar = function () {
+                var data = {
+                    id: 23,
+                    firstName: "André",
+                    lastName: "Baltieri",
+                    email: "andrebaltieri@hotmail.com"
+                };
+
+                Put(data);
+            }
+
+            $scope.excluir = function () {
+                Delete(39);
+            }
+
+            var serviceUrl = 'http://customer-service.azurewebsites.net/api/clientes';
+
+            function Get() {
+                $http.get(serviceUrl)
+                    .success(function (result, status, headers, config) {
+                        console.log(result);
+                    });
+            }
+
+            function GetById(id) {
+                $http.get(serviceUrl + "/" + id)
+                    .success(function (result, status, headers, config) {
+                        console.log(result);
+                    });
+            }
+
+            function Post(data) {
+                $http.post(serviceUrl, data)
+                   .success(function (result) {
+                       console.log(result);
+                   });
+            }
+
+            function Put(data) {
+                $http.put(serviceUrl, data)
+                    .success(function (result) {
+                        console.log(result);
+                    });
+            }
+
+            function Delete(id) {
+                $http.delete(serviceUrl + "/" + id)
+                .success(function (result) {
+                    console.log(result);
+                });
+            }
+        }]);
+    </script>
+</body>
+</html>
