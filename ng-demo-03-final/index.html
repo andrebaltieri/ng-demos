@@ -15,37 +15,74 @@
     <div class="container" ng-controller="MeuController">
         <h1 class="text-center">{{ title }} - {{ remaining() }} restante(s)</h1>
         <hr />
+
         <div class="col-md-4">
-            <h3>Minhas Tarefas</h3>
-            <input type="text" class="form-control" placeholder="Filtrar" ng-model="search" />
-            <br />
-            <ul class="list-unstyled" ng-repeat="todo in todos | filter: search">
-                <li>
-                    <input type="hidden" value="{{ todo.id}}" />
-                    <input type="checkbox" ng-model="todo.done"> -
-                    <span class="todo-{{ todo.done }}">{{ todo.text }}</span>
-                    <div class="btn-group pull-right">
-                        <button class="btn btn-default btn-sm" ng-click="editar(todo)"><i class="fa fa-edit"></i></button>
-                        <button class="btn btn-danger btn-sm" ng-click="excluir(todo)"><i class="fa fa-remove"></i></button>
-                    </div>
-                </li>
-            </ul>
+            <div class="thumbnail">
+                <div class="page-header">
+                    <h3>Minhas Tarefas</h3>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Done?</th>
+                            <th>Item</th>
+                            <th>Editar/Deletar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="todo in todos">
+                            <td>
+                                {{todo.id}}
+                            </td>
+                            <td>
+                                <input type="checkbox" ng-model="todo.done" />
+                            </td>
+                            <td>
+                                <span class="todo-{{todo.done}}">{{todo.text}}</span>
+                            </td>
+                            <td>
+                                <!-- botões de editar e deletar -->
+                                <div class="btn-group">
+                                    <button class="btn btn-default btn-sm" ng-click="editar(todo)">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" ng-click="excluir(todo)">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
+
         <div class="col-md-4">
-            <h3>Gerenciar Tarefas</h3>
-            <input type="hidden" value="{{ todo.id}}" />
-            <input type="text" class="form-control" placeholder="Tarefa" ng-model="todo.text" />
-            <input type="checkbox" ng-model="todo.done" /> Tarefa Concluída
-            <hr />
-            <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="salvar(todo)">Salvar</button>
-            <button class="btn btn-primary" ng-show="todo.id != 0" ng-click="novo()">Novo</button>
-            <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="novo()">Cancelar</button>
+            <div class="thumbnail">
+                <div class="page-header">
+                    <h3>Gerenciar Tarefas</h3>
+                </div>
+                <input type="hidden" ng-model="todo.id" />
+                <input type="text" class="form-control" ng-model="todo.text" />
+                <input type="checkbox" ng-model="todo.done" /> Tarefa Concluída
+                <hr />
+                <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="salvar(todo)">Salvar</button>
+                <button class="btn btn-primary" ng-show="todo.id != 0" ng-click="novo()">Novo</button>
+                <button class="btn btn-primary" ng-show="todo.id == 0" ng-click="novo()">Cancelar</button>
+            </div>
         </div>
+
         <div class="col-md-4">
-            <h3>Ações</h3>
-            <p>Selecione o que deseja fazer:</p>
-            <button class="btn btn-info" ng-click="salvarDisco()">Persistir em Disco</button>
-            <button class="btn btn-success" ng-click="lerDisco()">Ler do Disco</button>
+            <div class="thumbnail">
+                <div class="page-header">
+                    <h3>Ações</h3>
+                </div>
+                <p>Selecione o que deseja fazer: </p>
+                <button class="btn btn-info" ng-click="salvarDisco()">Salvar em Disco</button>
+                <button class="btn btn-success" ng-click="lerDisco()">Ler do Disco</button>
+            </div>
         </div>
     </div>
 
